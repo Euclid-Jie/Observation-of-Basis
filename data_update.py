@@ -5,15 +5,17 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 if __name__ == "__main__":
-    print("Updating IC/IM data...")
+    print("Updating IF/IC/IM data...")
+    IF_data = load_bais("IF")
+    IF_data.to_csv(Path("data/IF_data.csv"), index=False, encoding="utf-8-sig")
     IC_data = load_bais("IC")
     IC_data.to_csv(Path("data/IC_data.csv"), index=False, encoding="utf-8-sig")
     IM_data = load_bais("IM")
     IM_data.to_csv(Path("data/IM_data.csv"), index=False, encoding="utf-8-sig")
     fig = plot_lines_chart(
         x_data=IC_data["日期"],
-        ys_data=[IC_data["年化基差(%)"], IM_data["年化基差(%)"]],
-        names=["IC年化基差(%)", "IM年化基差(%)"],
+        ys_data=[IF_data["年化基差(%)"], IC_data["年化基差(%)"], IM_data["年化基差(%)"]],
+        names=["IF年化基差(%)", "IC年化基差(%)", "IM年化基差(%)"],
         range_start=75,
     )
     html = f"""<html>
