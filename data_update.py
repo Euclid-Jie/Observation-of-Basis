@@ -55,7 +55,7 @@ if __name__ == "__main__":
         <body>
             <div>CopyRight © Euclid-Jie Last Updated: {datetime.now(ZoneInfo('Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S")}</div>
             {fig.render_embed()}
-            <div style="margin-top: 30px; font-size: 14px; line-height: 1.5;">
+            <div style="margin-top: 30px; font-size: 14px; line-height: 1.5; margin-left: 20px; font-family: 'Calibri', sans-serif;">
             <div style="font-weight: bold; margin-bottom: 10px;">基差计算说明</div>
             <div>年化基差算法: 每一天，针对主力合约计算基差(=期货价格-现货价格)，然后提取当天至该主力合约到期日之间的"期内分红"，进而计算出"矫正基差"(=基差+期内分红)，最后计算出年化基差率，公式如下:</div>
             <div style="margin: 10px 0;">年化基差率 = (矫正基差 ÷ 指数现货收盘价) × (365 ÷ 合约到期剩余天数)</div>

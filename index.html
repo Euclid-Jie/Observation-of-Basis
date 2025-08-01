@@ -33,7 +33,7 @@
             </style>
         </head>
         <body>
-            <div>CopyRight © Euclid-Jie Last Updated: 2025-08-01 12:04:16</div>
+            <div>CopyRight © Euclid-Jie Last Updated: 2025-08-01 12:17:40</div>
             <!DOCTYPE html>
 <html>
 <head>
@@ -43,11 +43,11 @@
 
 </head>
 <body >
-    <div id="5e5991eee7484767aca6cf65b9701c33" class="chart-container" style="width:1560px; height:600px; text-align:center; margin: auto"></div>
+    <div id="0f2180aa120e4b5483b0ccc16c1e819c" class="chart-container" style="width:1560px; height:600px; text-align:center; margin: auto"></div>
     <script>
-        var chart_5e5991eee7484767aca6cf65b9701c33 = echarts.init(
-            document.getElementById('5e5991eee7484767aca6cf65b9701c33'), 'white', {renderer: 'canvas'});
-        var option_5e5991eee7484767aca6cf65b9701c33 = {
+        var chart_0f2180aa120e4b5483b0ccc16c1e819c = echarts.init(
+            document.getElementById('0f2180aa120e4b5483b0ccc16c1e819c'), 'white', {renderer: 'canvas'});
+        var option_0f2180aa120e4b5483b0ccc16c1e819c = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -1097,7 +1097,7 @@
             "seriesLayoutBy": "column",
             "lineStyle": {
                 "show": true,
-                "width": 3,
+                "width": 2,
                 "opacity": 1,
                 "curveness": 0,
                 "type": "solid"
@@ -2140,7 +2140,7 @@
             "seriesLayoutBy": "column",
             "lineStyle": {
                 "show": true,
-                "width": 3,
+                "width": 2,
                 "opacity": 1,
                 "curveness": 0,
                 "type": "solid"
@@ -3183,7 +3183,7 @@
             "seriesLayoutBy": "column",
             "lineStyle": {
                 "show": true,
-                "width": 3,
+                "width": 2,
                 "opacity": 1,
                 "curveness": 0,
                 "type": "solid"
@@ -3584,10 +3584,17 @@
         }
     ]
 };
-        chart_5e5991eee7484767aca6cf65b9701c33.setOption(option_5e5991eee7484767aca6cf65b9701c33);
+        chart_0f2180aa120e4b5483b0ccc16c1e819c.setOption(option_0f2180aa120e4b5483b0ccc16c1e819c);
     </script>
 </body>
 </html>
 
+            <div style="margin-top: 30px; font-size: 14px; line-height: 1.5; margin-left: 20px; font-family: 'Calibri', sans-serif;">
+            <div style="font-weight: bold; margin-bottom: 10px;">基差计算说明</div>
+            <div>年化基差算法: 每一天，针对主力合约计算基差(=期货价格-现货价格)，然后提取当天至该主力合约到期日之间的"期内分红"，进而计算出"矫正基差"(=基差+期内分红)，最后计算出年化基差率，公式如下:</div>
+            <div style="margin: 10px 0;">年化基差率 = (矫正基差 ÷ 指数现货收盘价) × (365 ÷ 合约到期剩余天数)</div>
+            <div>期内分红算法: 把合约剩余期限内每日的指数分红点位相加，如果是历史合约，指数每日的分红点位直接用对应的股息点指数来计算，如果是当前尚未到期的合约，未来期限内的每日分红点位用预测值计算。</div>
+            <div>主力合约是根据昨持仓进行判断，昨持仓最大的即为当日主力合约。</div>
+            </div>
         </body>
     </html>
