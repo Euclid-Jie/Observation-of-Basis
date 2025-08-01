@@ -99,6 +99,6 @@ def plot_lines_chart(
         ],
         tooltip_opts=opts.TooltipOpts(trigger="axis"),
     ).set_series_opts(
-        linestyle_opts=opts.LineStyleOpts(width=3),
+        linestyle_opts=opts.LineStyleOpts(width=2),
     )
     return line
