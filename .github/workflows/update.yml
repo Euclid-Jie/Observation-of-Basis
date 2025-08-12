@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TZ: 'Asia/Shanghai'  # 设置时区为上海
 
     steps:
       # Checkout main branch to get the latest code
