@@ -1,17 +1,41 @@
+import sqlalchemy
 from utils import load_bais
-from pathlib import Path
 from utils import plot_lines_chart
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from config import SQL_PASSWORDS, SQL_HOST
+
+def write_to_sql(data, table_name, engine):
+    data.to_sql(
+        name=table_name,
+        con=engine,
+        if_exists="replace",
+        index=False,
+        dtype={
+            "日期": sqlalchemy.types.Date,
+            "主力合约": sqlalchemy.types.String(20),
+            "到期日": sqlalchemy.types.Date,
+            "剩余天数": sqlalchemy.types.Integer,
+        },
+    )
 
 if __name__ == "__main__":
+    print("Starting sql data update process...")
+    engine = sqlalchemy.create_engine(
+        f"mysql+pymysql://dev:{SQL_PASSWORDS}@{SQL_HOST}:3306/UpdatedData?charset=utf8"
+    )
+    future_types = ["IF", "IC", "IM", "IH"]
+    all_data = {}
+    for future_type in future_types:
+        data = load_bais(future_type)
+        all_data[future_type] = data
+        write_to_sql(data, f"{future_type}_data", engine)
+        print(f"{future_type} data updated successfully.")
+
     print("Updating IF/IC/IM data...")
-    IF_data = load_bais("IF")
-    IF_data.to_csv(Path("data/IF_data.csv"), index=False, encoding="utf-8-sig")
-    IC_data = load_bais("IC")
-    IC_data.to_csv(Path("data/IC_data.csv"), index=False, encoding="utf-8-sig")
-    IM_data = load_bais("IM")
-    IM_data.to_csv(Path("data/IM_data.csv"), index=False, encoding="utf-8-sig")
+    IF_data = all_data.get("IF")
+    IC_data = all_data.get("IC")
+    IM_data = all_data.get("IM")
     fig = plot_lines_chart(
         x_data=IC_data["日期"],
         ys_data=[IF_data["年化基差(%)"], IC_data["年化基差(%)"], IM_data["年化基差(%)"]],
@@ -37,7 +61,7 @@ if __name__ == "__main__":
                 table, th, td {{
                     border: 1px solid #ddd;
                     padding: 8px;
-                    text-align: center; 
+                    text-align: center;
                 }}
                 th {{
                     background-color: #f59e00;
