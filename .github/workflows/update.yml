@@ -18,7 +18,7 @@ jobs:
           python-version: '3.10'
       - name: Run trading day AND time checker
         id: check_time
-        run: echo "result=$(python trading_checker.py)" >> $GITHUB_OUTPUT
+        run: echo "result=$(python check_trading.py)" >> $GITHUB_OUTPUT
 
   # 任务2:数据更新
   build:

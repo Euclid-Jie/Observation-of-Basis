@@ -14,7 +14,7 @@ def get_trading_status():
     is_weekday = today.weekday() < 5
     is_holiday = False
     try:
-        with open("Chinese_special_holidays.txt", 'r') as f:
+        with open("Chinese_special_holiday.txt", 'r') as f:
             holidays = {line.strip() for line in f}
         if today.strftime("%Y-%m-%d") in holidays:
             is_holiday = True
