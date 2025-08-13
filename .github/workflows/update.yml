@@ -25,6 +25,9 @@ jobs:
 
       # run update_data for 15min schedule
       - name: run update_data
+        env:
+          SQL_PASSWORDS: ${{ secrets.SQL_PASSWORDS }}
+          SQL_HOST: ${{ secrets.SQL_HOST }}
         run: |
           pip install -r ./requirements.txt
           python3 ./data_update.py
