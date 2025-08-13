@@ -6,7 +6,24 @@ on:
     - cron: '*/15 * * * *'  # 每15分钟执行一次
 
 jobs:
+  # 任务1：交易时间条件检查
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check_time.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Run trading day AND time checker
+        id: check_time
+        run: echo "result=$(python check_trading.py)" >> $GITHUB_OUTPUT
+
+  # 任务2:数据更新
   build:
+    needs: check
+    if: needs.check.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     env:
       TZ: 'Asia/Shanghai'  # 设置时区为上海
