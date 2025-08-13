@@ -1,13 +1,9 @@
-import os
 import sqlalchemy
 from utils import load_bais
-from pathlib import Path
 from utils import plot_lines_chart
 from datetime import datetime
 from zoneinfo import ZoneInfo
-
-SQL_PASSWORDS = os.environ["SQL_PASSWORDS"]
-SQL_HOST = os.environ["SQL_HOST"]
+from config import SQL_PASSWORDS, SQL_HOST
 
 def write_to_sql(data, table_name, engine):
     data.to_sql(
